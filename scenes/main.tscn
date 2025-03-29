@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://76hadc3atrbs"]
+
+[ext_resource type="PackedScene" uid="uid://ch37maduo82ud" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dwtmmk5skudrq" path="res://scenes/Enemy.tscn" id="2_0wfyh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
+size = Vector2(40, 558)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
+size = Vector2(214, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
+size = Vector2(214, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(53, 559)
+
+[node name="main" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_o5qli")]
+position = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -226)
+zoom = Vector2(3, 2.3)
+
+[node name="worldborder" type="StaticBody2D" parent="."]
+
+[node name="leftborder" type="CollisionShape2D" parent="worldborder"]
+position = Vector2(-127, -227)
+shape = SubResource("RectangleShape2D_o5qli")
+
+[node name="topborder" type="CollisionShape2D" parent="worldborder"]
+position = Vector2(0, -518.5)
+shape = SubResource("RectangleShape2D_0wfyh")
+
+[node name="botborder" type="CollisionShape2D" parent="worldborder"]
+position = Vector2(0, 66.5)
+shape = SubResource("RectangleShape2D_sugp2")
+
+[node name="rightborder" type="CollisionShape2D" parent="worldborder"]
+position = Vector2(133.5, -227.5)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Enemy" parent="." instance=ExtResource("2_0wfyh")]
+position = Vector2(-67, -468)
+rotation = -3.15631
+
+[node name="Enemy2" parent="." instance=ExtResource("2_0wfyh")]
+position = Vector2(40, -418)
+rotation = -3.13582
