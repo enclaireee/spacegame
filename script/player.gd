@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var acceleration: float = 300.0  
 @export var friction: float = 500.0  
 @export var max_hp: int = 3  
+#@export var projectile_scene: PackedScene = preload("res://scenes/projectile.tscn")
 
 var current_hp: int
 
@@ -12,10 +13,8 @@ func _ready():
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO  
-
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-
+	
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
@@ -25,15 +24,15 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 
 	move_and_slide()
-
-func _on_body_entered(body):
-	if body.is_in_group("obstacles"):
-		current_hp -= 1
-		print("HP:", current_hp)
-		
-		if current_hp <= 0:
-			die()
-
+	
 func die():
 	print("Player Died!")  
 	queue_free()
+
+	#if Input.is_action_just_pressed("move_up"):
+		#shoot()
+
+#func shoot():
+	#var bullet = projectile_scene.instantiate()
+	#bullet.position = position + Vector2(0, -20)
+	#get_parent().add_child(bullet)

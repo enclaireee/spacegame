@@ -58,8 +58,12 @@ autoplay = "default"
 frame_progress = 0.820228
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_8qclf")
 
 [node name="ShootTimer" type="Timer" parent="."]
 
 [node name="MoveTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="." method="on_shoot_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="on_move_timer_timeout"]
