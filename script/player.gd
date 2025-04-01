@@ -32,7 +32,6 @@ func _physics_process(delta):
 func die():
 	print("Player Died!")  
 	queue_free()
-	
 
 
 # implement player proj 

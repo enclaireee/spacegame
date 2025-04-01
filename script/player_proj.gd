@@ -5,7 +5,7 @@ extends Area2D
 @export var damage: int = 1  
 
 func _ready():
-	print("player_proj spawned at:", position)
+	pass
 
 func _process(delta):
 	position += direction.normalized() * speed * delta  

@@ -9,7 +9,6 @@ var direction: int = 1
 var start_x: float
 var current_hp: int
 
-
 func _ready():
 	start_x = position.x
 	current_hp = max_hp
@@ -26,23 +25,20 @@ func _ready():
 	move_timer.start()
 	move_timer.timeout.connect(self.on_move_timer_timeout)
 
-func _process(delta):
-	position.x += direction * speed * delta
+func _physics_process(delta):
+	velocity.x = direction * speed
+	var collision = move_and_collide(velocity * delta)
 	
-	if abs(position.x - start_x) >= move_distance:
-		direction *= -1
+	if collision:
+		direction *= -1  # Reverse direction on collision
 
 func on_shoot_timer_timeout():
 	var bullet = projectile_scene.instantiate()
 	bullet.position = position + Vector2(0, 20)  # Offset to spawn below the enemy
-	
 	get_parent().add_child(bullet)
 
 func on_move_timer_timeout():
 	direction *= -1
-
-func _on_move_timer_timeout() -> void:
-	pass 
 
 func die() -> void:
 	print("Enemy Died!")
